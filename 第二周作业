@@ -1,0 +1,10 @@
+1、异常处理在程序中不需要往上抛，在dao层做空值处理，如果程序员需要打印一些调试可以wrap error，往上抛
+
+err = db.QueryRow("select name from users where id = ?", 1).Scan(&name)
+if err != nil {
+    if err == sql.ErrNoRows {
+        // there were no rows, but otherwise no error occurred
+    } else {
+        log.Fatal(err)
+    }
+}
